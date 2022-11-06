@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery.js"></script>
+    <!--<script src="/php/task/javascript/login.js"></script>-->
+</head>
+<body><div class="container" id="l1">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-8 col-lg-12">
+            <div class="container bg-white rounded my-2 px-0">
+    <div class="py-1  text-black">
+        <h1 style="text-align:center;">Login Form</h1>
+    </div>
+    <form id="f2">
+        <div class="py-3 mx-5">
+            <input type="text" class="form-control border-dark" placeholder="Enter Your User Name" id="username" name="username">
+        </div>
+        <div class="py-3 mx-5">
+            <input type="password" class="form-control border-dark" placeholder="Enter Your Password" id="password" name="password">
+        </div>
+        <div class="py-3 mx-5">
+            <input type="button" class="form-control border-dark" value="LOGIN" id="b2">
+        </div>
+        <div class="py-3 mx-5">
+            <a href="index.html"><input type="button" class="form-control border-dark" value="REGISTER"></a>
+         </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $("document").ready(function()
+{
+$("#b2").click(function(){
+   
+    var username=$('#username').val();
+        $.ajax({
+            url:"/php/task/php1/check.php",
+            type:"post",
+            data:$("#f2").serialize(),
+            success:function(res)
+            { 
+                if(res==1)
+                {
+                    
+                  localStorage.setItem("userdata",username);
+                  alert("login successfully");
+                  window.location.href="/php/task/html/welcome.html";
+                }
+                else
+                {
+                    alert("invalid");
+                }
+                $("#f2")[0].reset();
+               
+            }
+        });
+    });
+});
+    </script>
+  
+</body>
+</html>

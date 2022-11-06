@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script>
+        function logout()
+        {
+        if(localStorage.getItem("userdata")!=null)
+       {
+   localStorage.removeItem("userdata");
+   location.href="/php/task/html/login.html";
+        }
+    }
+    </script>
+    <script>
+        if(localStorage.getItem("userdata")==null)
+        {
+            location.href="/php/task/html/login.html"; 
+        }
+    </script>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <h1>Home</h1>
+    <p id="d">
+        <br>
+        <br>
+    </p>
+<input type="button" value="Logout" onclick="return logout()">
+<br>
+<br>
+<form>
+    <input type="button" id="b3" value="View Profile">
+</form>
+<br>
+<script src="js/bootstrap.min.js"></script> 
+<script>
+    $("document").ready(function()
+{
+$("#b3").click(function(){
+    var username=localStorage.getItem("userdata");
+        $.ajax({
+            url:"/php/task/php1/view.php",
+            type:"post",
+            data:{"data":username},
+            success:function(res)
+            { 
+                $("#d").html(res);
+
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
